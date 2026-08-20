@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from 'next/image'
 
 const links = [
   { href: "/", label: "Home" },
@@ -60,7 +61,12 @@ export default function Navbar() {
           href="/"
           className="font-display text-[17px] leading-none tracking-[0.28em] whitespace-nowrap uppercase md:text-lg"
         >
-          Trav Trails
+          <Image
+            src="/trav_trials.svg"
+            width={125}
+            height={125}
+            alt="Picture of the author"
+          />
         </Link>
 
         {/* Desktop links */}
