@@ -9,7 +9,7 @@ const links = [
   { href: "/destinations", label: "Destinations" },
   { href: "/tours", label: "Tours" },
   { href: "/about", label: "About" },
-  { href: "/enquire", label: "Enquire" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -24,7 +24,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setOpen(false), [pathname]);
+  const [navPath, setNavPath] = useState(pathname);
+  if (navPath !== pathname) {
+    setNavPath(pathname);
+    setOpen(false);
+  }
 
   useEffect(() => {
     if (!open) return;
@@ -42,75 +46,64 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/80 shadow-sm backdrop-blur-md dark:bg-neutral-950/80"
-          : "bg-transparent"
+          ? "border-b border-hairline bg-background/85 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
       <nav
         aria-label="Main"
-        className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 md:h-20"
+        className="flex h-16 items-center justify-between px-5 md:h-20 md:px-8 lg:px-10"
       >
         <Link
           href="/"
-          className="flex items-center gap-2 text-lg font-bold tracking-tight"
+          className="font-display text-[17px] leading-none tracking-[0.28em] whitespace-nowrap uppercase md:text-lg"
         >
-          <span
-            aria-hidden
-            className="grid size-8 place-items-center rounded-full bg-sky-600 text-sm font-black text-white"
-          >
-            TT
-          </span>
-          TRAV TRAILS
+          Trav Trails
         </Link>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-9 md:flex lg:gap-11">
           {links.map(({ href, label }) => (
             <li key={href}>
               <Link
                 href={href}
                 aria-current={isActive(href) ? "page" : undefined}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors}`}
+                className={`text-[10.5px] font-light tracking-[0.2em] uppercase transition-colors duration-300 hover:text-accent ${
+                  isActive(href) ? "text-accent" : "text-muted"
+                }`}
               >
-                {label.toUpperCase()}
+                {label}
               </Link>
             </li>
           ))}
-          <li className="ml-2">
+          <li>
             <Link
               href="/book"
-              className="rounded-full bg-sky-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-sky-700"
+              className="border border-hairline px-6 py-2.5 text-[10.5px] font-light tracking-[0.2em] uppercase transition-colors duration-300 hover:border-accent hover:text-accent"
             >
-              Book Now
+              Enquire
             </Link>
           </li>
         </ul>
 
-        {/* Hamburger — three bars that fold into an X */}
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="-mr-2 grid size-11 place-items-center rounded-lg md:hidden"
+          className="-mr-2 grid size-11 place-items-center md:hidden"
         >
-          <span className="sr-only">Menu</span>
-          <span aria-hidden className="relative block h-4 w-6">
+          <span aria-hidden className="relative block h-2.5 w-6">
             <span
-              className={`absolute left-0 block h-0.5 w-6 rounded bg-current transition-transform duration-300 ${
+              className={`absolute left-0 block h-px w-6 bg-current transition-transform duration-500 ${
                 open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
               }`}
             />
             <span
-              className={`absolute top-1/2 left-0 block h-0.5 w-6 -translate-y-1/2 rounded bg-current transition-opacity duration-200 ${
-                open ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`absolute left-0 block h-0.5 w-6 rounded bg-current transition-transform duration-300 ${
+              className={`absolute left-0 block h-px w-6 bg-current transition-transform duration-500 ${
                 open ? "top-1/2 -translate-y-1/2 -rotate-45" : "top-full"
               }`}
             />
@@ -118,38 +111,33 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
       <div
         id="mobile-menu"
         inert={!open || undefined}
-        className={`grid overflow-hidden border-neutral-200 bg-white transition-[grid-template-rows,opacity] duration-300 md:hidden dark:border-neutral-800 dark:bg-neutral-950 ${
-          open
-            ? "grid-rows-[1fr] border-t opacity-100"
-            : "grid-rows-[0fr] opacity-0"
+        className={`grid overflow-hidden bg-background transition-[grid-template-rows,opacity] duration-500 md:hidden ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <ul className="min-h-0 px-4 py-2 sm:px-6">
+        <ul className="min-h-0 px-5">
           {links.map(({ href, label }) => (
             <li key={href}>
               <Link
                 href={href}
                 aria-current={isActive(href) ? "page" : undefined}
-                className={`block border-b border-neutral-100 py-3.5 text-base font-medium dark:border-neutral-900 ${
-                  isActive(href)
-                    ? "text-sky-600"
-                    : "text-neutral-800 dark:text-neutral-200"
+                className={`font-display block border-b border-hairline py-4 text-lg tracking-[0.14em] uppercase ${
+                  isActive(href) ? "text-accent" : ""
                 }`}
               >
                 {label}
               </Link>
             </li>
           ))}
-          <li className="py-4">
+          <li className="py-6">
             <Link
               href="/book"
-              className="block rounded-full bg-sky-600 px-5 py-3 text-center text-base font-semibold text-white"
+              className="block border border-hairline py-3.5 text-center text-[10.5px] font-light tracking-[0.2em] uppercase"
             >
-              Book Now
+              Enquire
             </Link>
           </li>
         </ul>

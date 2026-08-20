@@ -1,22 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light only — ignore the OS dark-mode preference for scrollbars, form
+     controls and other browser-painted UI. */
+  color-scheme: light;
+
+  --background: #fbfaf8; /* warm paper, not pure white */
+  --foreground: #14110f; /* warm near-black */
+  --muted: #6f665d;
+  --accent: #a8875a; /* antique gold */
+  --hairline: rgb(20 17 15 / 0.14);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-hairline: var(--hairline);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Distinct source names so the theme token never references itself. */
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-serif-display), ui-serif, Georgia, serif;
 }
 
 /* Keep anchor targets clear of the sticky navbar (h-16 mobile / h-20 desktop). */
@@ -25,5 +30,6 @@ html {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
 }

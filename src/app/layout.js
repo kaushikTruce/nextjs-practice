@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { display, sans } from "./fonts";
 import "./globals.css";
 
 export const metadata = {
@@ -8,8 +9,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+      <body className="min-h-full flex flex-col font-sans antialiased">
         <Navbar />
         {children}
       </body>
