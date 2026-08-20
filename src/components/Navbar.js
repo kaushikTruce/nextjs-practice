@@ -48,7 +48,7 @@ export default function Navbar() {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-500 ${
-        scrolled
+        scrolled || open
           ? "border-b border-hairline bg-background/85 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}

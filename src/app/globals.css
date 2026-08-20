@@ -26,7 +26,14 @@
 
 /* Keep anchor targets clear of the sticky navbar (h-16 mobile / h-20 desktop). */
 html {
+  scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
