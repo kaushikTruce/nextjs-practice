@@ -89,7 +89,7 @@ export default function Navbar() {
               href="/book"
               className="border border-hairline px-6 py-2.5 text-[10.5px] font-light tracking-[0.2em] uppercase transition-colors duration-300 hover:border-accent hover:text-accent"
             >
-              Enquire
+              Schedule a Call 📞
             </Link>
           </li>
         </ul>
@@ -143,7 +143,7 @@ export default function Navbar() {
               href="/book"
               className="block border border-hairline py-3.5 text-center text-[10.5px] font-light tracking-[0.2em] uppercase"
             >
-              Enquire
+              Schedule a Call 📞
             </Link>
           </li>
         </ul>

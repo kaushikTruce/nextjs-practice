@@ -9,6 +9,7 @@
   --foreground: #14110f; /* warm near-black */
   --muted: #6f665d;
   --accent: #a8875a; /* antique gold */
+  --danger: #8f3a2f; /* deep terracotta — legible without breaking the palette */
   --hairline: rgb(20 17 15 / 0.14);
 }
 
@@ -17,6 +18,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-danger: var(--danger);
   --color-hairline: var(--hairline);
 
   /* Distinct source names so the theme token never references itself. */
